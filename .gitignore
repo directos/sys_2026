@@ -1,0 +1,12 @@
+# Ignorar el archivo .env
+.env
+
+# Ignorar dependencias de Composer
+vendor/
+
+# Ignorar archivos de logs
+*.log
+
+# Ignorar configuraciones del sistema operativo
+.DS_Store
+Thumbs.db

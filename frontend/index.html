@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Index</title>
+  <!--<link rel="stylesheet" href="styles.css">-->
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Sys 2026</h1>
+  </header>
+  
+  <main>
+    <div id="app">
+
+      <!-- Listado de sucursales -->
+      <h2>Listado de Sucursales</h2>
+      <button @click="fetchSucursales">Cargar Sucursales</button>     
+      <ul v-if="sucursales.length > 0">
+        <li v-for="sucursal in sucursales" :key="sucursal.id">
+          {{ sucursal.nombre_sucursal }} - {{ sucursal.ubicacion }}
+        </li>
+      </ul>
+      <p v-else>No hay sucursales disponibles.</p>
+
+      <!-- Buscar una sucursal por id -->
+      <h2>Buscar Sucursal por ID</h2>
+      <input type="text" v-model="sucursalId" placeholder="Ingrese ID de Sucursal" />
+      <button @click="fetchSucursalById">Buscar</button>
+      <div v-if="sucursal">
+        <h3>Detalles de la Sucursal</h3>
+        <p>ID: {{ sucursal.id }}</p>
+        <p>Nombre: {{ sucursal.nombre_sucursal }}</p>
+        <p>Ubicación: {{ sucursal.ubicacion }}</p>
+        <p>Teléfono: {{ sucursal.telefonos }}</p>
+        <p>Gerente: {{ sucursal.gerente }}</p>
+      </div>
+      <p v-else>Ingrese un ID para buscar una sucursal.</p>
+
+    </div>
+  </main>
+  
+  <footer>
+    <p>&copy; 2026 Sys. All rights reserved.</p>
+  </footer>
+
+  <script src="./sucursales.js"></script>
+</body>
+</html>
