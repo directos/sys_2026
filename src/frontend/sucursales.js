@@ -1,5 +1,5 @@
 const { createApp } = Vue;
-const apiUrl = 'http://localhost/sys/backend'; // URL de la API
+const apiUrl = 'http://localhost/sys/src/backend'; // URL de la API
 
 createApp({
   data() {

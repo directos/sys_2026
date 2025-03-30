@@ -1,0 +1,82 @@
+{
+  "ResponseMetadata": {
+    "RequestId": "fb45e32d-717e-405e-9a64-ff82c89ab011",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "content-type": "application/json",
+      "content-length": "1004",
+      "connection": "keep-alive",
+      "date": "Mon,23 Dec 2024 00: 37: 55 GMT", "x-amzn-requestid": "fb45e32d-717e-405e-9a64-ff82c89ab011", "access-control-allow-origin": "*", "x-amz-apigw-id": "DOCToH94oAMEcxQ=", "access-control-expose-headers": "age,date,x-amz-apigw-id,x-amz-cf-id,x-amz-cf-pop,x-amzn-errormessage,x-amzn-errortype,x-amzn-requestid,x-amzn-trace-id,x-cache", "x-amzn-trace-id": "Root=1-6768b0e3-7f56390c1592ea036e554c06", "x-cache": "Miss from cloudfront", "via": "1.1 c59b5a542015c208c95d2ed3c65cdbcc.cloudfront.net (CloudFront)", "x-amz-cf-pop": "IAD12-P2", "x-amz-cf-id": "_AGDNt1wN9GQqi43NOm7qTe1mUquy1LctZul4TeI1YEOm3lVjkYNug=="
+    },
+    "RetryAttempts": 0
+  },
+  "RouteMatrix": [
+    [
+      {"Distance": 2.003, "DurationSeconds": 406
+      },
+      {"Distance": 0.737, "DurationSeconds": 200
+      },
+      {"Distance": 2.019, "DurationSeconds": 424
+      },
+      {"Distance": 3.767, "DurationSeconds": 674
+      }
+    ],
+    [
+      {"Distance": 1.749, "DurationSeconds": 350
+      },
+      {"Distance": 0, "DurationSeconds": 0
+      },
+      {"Distance": 1.764, "DurationSeconds": 368
+      },
+      {"Distance": 3.112, "DurationSeconds": 558
+      }
+    ],
+    [
+      {"Distance": 0.041, "DurationSeconds": 35
+      },
+      {"Distance": 1.605, "DurationSeconds": 339
+      },
+      {"Distance": 0, "DurationSeconds": 0
+      },
+      {"Distance": 2.126, "DurationSeconds": 424
+      }
+    ],
+    [
+      {"Distance": 2.105, "DurationSeconds": 416
+      },
+      {"Distance": 3.125, "DurationSeconds": 584
+      },
+      {"Distance": 2.12, "DurationSeconds": 434
+      },
+      {"Distance": 0, "DurationSeconds": 0
+      }
+    ]
+  ], "SnappedDeparturePositions": [
+    [
+      -122.333131, 47.609673
+    ],
+    [
+      -122.340078, 47.610187
+    ],
+    [
+      -122.349398, 47.62006
+    ],
+    [
+      -122.360005, 47.629567
+    ]
+  ], "SnappedDestinationPositions": [
+    [
+      -122.349289, 47.620164
+    ],
+    [
+      -122.340078, 47.610187
+    ],
+    [
+      -122.349398, 47.62006
+    ],
+    [
+      -122.360005, 47.629567
+    ]
+  ], "Summary": {"DataSource": "Esri", "RouteCount": 16, "ErrorCount": 0, "DistanceUnit": "Kilometers"
+  }
+}

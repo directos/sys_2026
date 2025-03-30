@@ -1,12 +1,16 @@
 # Ignorar el archivo .env
 #.env
 
-# Ignorar dependencias de Composer
+# Dependencias de Composer y Node.js
 vendor/
+node_modules/
 
-# Ignorar archivos de logs
+# Dependencias de Py para AWS
+dependencias/
+
+# Archivos de logs
 *.log
 
-# Ignorar configuraciones del sistema operativo
+# Configuraciones del sistema operativo
 .DS_Store
 Thumbs.db

@@ -131,3 +131,14 @@ Vamos a la carpera wwww/frontend. Esto iniciará NPM y creará el archivo packag
   npm init -y
   npm install
 ```
+
+Otros componentes:
+
+```bash
+npm install webpack
+npm install --save-dev terser webpack 
+npm install --save-dev html-minimizer-webpack-plugin 
+npm install --save-dev css-minimizer-webpack-plugin 
+npm install --save-dev mini-css-extract-plugin
+npm install --save-dev style-loader
+```
