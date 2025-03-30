@@ -1,5 +1,5 @@
 # Ignorar el archivo .env
-.env
+#.env
 
 # Ignorar dependencias de Composer
 vendor/

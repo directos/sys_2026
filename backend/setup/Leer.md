@@ -11,7 +11,7 @@ Antes de comenzar, asegúrate de tener lo siguiente instalado en tu sistema:
 ## Pasos de instalación y config inicial
 
 1. **Creamos la carpeta 'backend'**  
-  Nos movemos a la carpeta principal del proyecto y creamos una carpeta llamada 'backend': `sys_2026/backend`
+  Nos movemos a la carpeta principal del proyecto y creamos una carpeta llamada 'backend': `sys/backend`
 
 2. **Instalar dependencias con Composer**  
   Ejecuta el siguiente comando para instalar las dependencias del proyecto:
