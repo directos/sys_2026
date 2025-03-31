@@ -132,7 +132,7 @@ Vamos a la carpera wwww/frontend. Esto iniciará NPM y creará el archivo packag
   npm install
 ```
 
-Otros componentes:
+Otras dependencias:
 
 ```bash
 npm install webpack
@@ -141,4 +141,13 @@ npm install --save-dev html-minimizer-webpack-plugin
 npm install --save-dev css-minimizer-webpack-plugin 
 npm install --save-dev mini-css-extract-plugin
 npm install --save-dev style-loader
+
+npm install vue vue-loader vue-style-loader css-loader --save
+npm install webpack webpack-cli webpack-dev-server html-webpack-plugin --save-dev
+```
+**Vue y TS**
+```bash
+npm install vue
+npm install -g @vue/cli
+npm install --save-dev typescript
 ```

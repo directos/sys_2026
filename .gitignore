@@ -4,6 +4,7 @@
 # Dependencias de Composer y Node.js
 vendor/
 node_modules/
+build/
 
 # Dependencias de Py para AWS
 dependencias/

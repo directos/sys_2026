@@ -8,15 +8,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlMinimizerPlugin = require("html-minimizer-webpack-plugin");
-const { VueLoaderPlugin } = require('vue-loader'); // Importa el plugin de Vue
 
 module.exports = {
     //stats: 'detailed', //'verbose', // 'errors-only', 
     entry: {
-        'app': './src/frontend/main.js',                            // Login
+        'app': './src/frontend/index.js',                           // Login
         'movil/app-movil': './src/frontend/movil/index.js',         // Agendas móviles
         'desktop/app-desktop': './src/frontend/desktop/index.js',   // Sys de escritorio
         'desktop/app-lite': './src/frontend/lite/index.lite.js',    // Versión mini
+        'board/app-board': './src/frontend/board/index.js',         // Para gerencia: charts y stats
     },
     output: {
         // eslint-disable-next-line no-undef
@@ -41,35 +41,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.vue$/, // Soporte para archivos .vue
-                loader: 'vue-loader',
-            },
-            {
-                test: /\.css$/i,    // Soporte para archivos CSS
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg|webp)$/i,
-                loader: 'file-loader',
-                options: {
-                    name: 'assets/img/[name].[ext]',
-                },
+                test: /\.css$/i,    //  test: /.s?css$/
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],   //use: ['style-loader', 'css-loader'],
             }
         ]
     },
-    resolve: {
-        alias: {
-            vue$: 'vue/dist/vue.esm-bundler.js', // Asegura que Vue use el compilador de plantillas
-        },
-        extensions: ['.*', '.js', '.vue', '.json'], // Extensiones que Webpack resolverá automáticamente
-    },
     plugins: [
-        new VueLoaderPlugin(), // Plugin necesario para procesar archivos .vue
         new CopyPlugin({
             patterns: [
-                { from: './src/backend', to: './backend', globOptions: { dot: true, ignore: ['**/setup/**', '**/vendor/**', '**/lib/**', '**/dev/**', '**/padron/**'] } },
-                { from: './src/frontend/manifest.json', to: './' },
-                { from: './src/frontend/assets', to: './assets', globOptions: { dot: true, ignore: ['**/_img/**'] } },
+                { from: './src/backend', to: './backend', globOptions: { dot: true, ignore: ['**/lib/**', '**/dev/**', '**/padron/**'] } },
+                { from: './src/manifest.json', to: './' },
+                { from: './src/frontend/assets', to: './assets', globOptions: { dot: true, ignore: ['**/img/**'] } },
                 { from: './src/frontend/assets/img/logo_print_min.jpg', to: './assets/img' },
                 { from: './src/frontend/templates', to: './templates' },
                 { from: './src/frontend/desktop/pages', to: './desktop' },
@@ -131,6 +113,11 @@ module.exports = {
                 removeComments: true,
             },
         }),
+        /*new Workbox.GenerateSW({
+            clientsClaim: false,
+            skipWaiting: false,           
+            exclude: [/\.(?:ini|php|py|gz|htaccess)$/], // excluimos archivos ini php y python del precaching.
+        }),*/
         new Workbox.InjectManifest({
             swSrc: "./src/src-service-worker.js",
             swDest: "service-worker.js",
@@ -141,6 +128,7 @@ module.exports = {
         new CompressionPlugin({
             filename: '[path][name].gz[query]',
             algorithm: 'gzip',
+            //test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
             threshold: 10240,
             minRatio: 0.8,
             exclude: /\/lib/,
