@@ -4,7 +4,7 @@
       <main>
         <div class="login-title mb-2">
           <div>
-            <img src="../assets/img/login_logo.png" alt="logo" width="80px" height="80px" />
+            <img src="@/assets/img/login_logo.png" alt="logo" width="80px" height="80px" />
           </div>
         </div>
 
@@ -41,45 +41,80 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted, computed } from "vue";
+import { Api } from "../utils/api.js";
+import { useStore } from 'vuex';
 
 export default {
   name: "LoginForm",
   setup() {
-    const user = ref("");
+    const store = useStore();
+    const currentUser = computed(() => store.getters.getUser);
+    const isAuthenticated = computed(() => store.getters.isAuthenticated);
+
+    const login = () => {
+      const mockUser = { name: 'John Doe', email: 'john@example.com' };
+      store.dispatch('login', mockUser);
+    };
+
+    const logout = () => {
+      store.dispatch('logout');
+    };
+
+    const userRef = ref("");
     const password = ref("");
     const errorMessage = ref("");
     const currentYear = new Date().getFullYear();
 
+    // Para manejar el submit del formulario:
     const handleSubmit = () => {
-      if (!user.value || !password.value) {
+      if (!userRef.value || !password.value) {
         errorMessage.value = "Por favor, completa todos los campos.";
         return;
       }
       // Aquí puedes manejar el envío del formulario
-      console.log("Usuario:", user.value);
+      console.log("Usuario:", userRef.value);
       console.log("Contraseña:", password.value);
     };
 
     const clear = () => {
-      user.value = "";
+      userRef.value = "";
       password.value = "";
       errorMessage.value = "";
     };
 
+    // Al montar el componente, buscamos las sucursales:
+    onMounted(async () => {
+      try {
+        const datax = {
+          api: "sucursales",
+          data: { accion_sucursales: {} },
+        };
+        const response = await Api(datax);
+        console.log("Sucursales:", response.length);
+      } catch (error) {
+        console.error("Error fetching sucursales:", error);
+      }
+    });
+
+    // Devolvemos las var y fn que queremos usar en el template:
     return {
-      user,
+      user: userRef,
       password,
       errorMessage,
       currentYear,
       handleSubmit,
       clear,
+      currentUser,
+      isAuthenticated,
+      login,
+      logout,
     };
   },
 };
 </script>
 
-<style scoped>
+<style>
 * {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
@@ -286,7 +321,6 @@ input {
   letter-spacing: 1px;
   color: #fff;
   line-height: 1.2;
-  /*text-transform: uppercase;*/
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -300,8 +334,6 @@ input {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   overflow: hidden;
-  /*background: #111;*/
-  /*border: 1px solid rgb(255 255 255 / 40%);*/
   box-shadow: 1px 1px 10px 1px rgba(255, 255, 255, 0.1);
   background: rgba(33, 33, 33, 0.9);
   -webkit-transition: all 0.4s;
