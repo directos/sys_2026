@@ -1,8 +1,8 @@
 {
-    "name": "xt/backend",
+    "name": "sys/backend",
     "autoload": {
         "psr-4": {
-            "Xt\\Backend\\": "src/"
+            "Sys\\Backend\\": "src/"
         }
     },
     "authors": [
