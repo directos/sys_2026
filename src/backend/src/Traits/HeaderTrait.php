@@ -1,6 +1,6 @@
 <?php
 
-namespace Xt\Backend\Traits;
+namespace Sys\Backend\Traits;
 
 trait HeaderTrait
 {

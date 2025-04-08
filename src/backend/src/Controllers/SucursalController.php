@@ -1,10 +1,10 @@
 <?php
 
-namespace Xt\Backend\Controllers;
+namespace Sys\Backend\Controllers;
 
 use R;
-use Xt\Backend\Models\Sucursal;
-use Xt\Backend\Traits\HeaderTrait;
+use Sys\Backend\Models\Sucursal;
+use Sys\Backend\Traits\HeaderTrait;
 
 class SucursalController
 {

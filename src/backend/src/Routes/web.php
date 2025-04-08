@@ -1,13 +1,22 @@
 <?php
 
-use Xt\Backend\Controllers\SucursalController;
-use Xt\Backend\Controllers\UsuarioController;
+namespace Sys\Backend\Routes;
 
-$router->get('/', function () {
-    echo "Yo solo soy el router";
-});
+use Bramus\Router\Router;
+use Sys\Backend\Controllers\SucursalController;
+use Sys\Backend\Controllers\UsuarioController;
 
-$router->get('/sucursales', [SucursalController::class, 'getAll']);
-$router->get('/sucursales/(\d+)', [SucursalController::class, 'getById']);
-$router->get('/usuarios', [UsuarioController::class, 'getAll']);
-$router->get('/usuarios/(\d+)', [UsuarioController::class, 'getById']);
+class Web
+{
+    public static function register(Router $router)
+    {
+        $router->get('/', function () {
+            echo "Yo solo soy el router";
+        });
+        
+        $router->get('/sucursales', [SucursalController::class, 'getAll']);
+        $router->get('/sucursales/(\d+)', [SucursalController::class, 'getById']);
+        $router->get('/usuarios', [UsuarioController::class, 'getAll']);
+        $router->get('/usuarios/(\d+)', [UsuarioController::class, 'getById']);
+    }
+}

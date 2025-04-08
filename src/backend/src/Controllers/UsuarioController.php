@@ -1,9 +1,9 @@
 <?php
 
-namespace Xt\Backend\Controllers;
+namespace Sys\Backend\Controllers;
 
-use Xt\Backend\Models\Usuario;
-use Xt\Backend\Traits\HeaderTrait;
+use Sys\Backend\Models\Usuario;
+use Sys\Backend\Traits\HeaderTrait;
 
 class UsuarioController
 {

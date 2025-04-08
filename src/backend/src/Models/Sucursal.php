@@ -1,6 +1,6 @@
 <?php
 
-namespace Xt\Backend\Models;
+namespace Sys\Backend\Models;
 
 use R;
 
