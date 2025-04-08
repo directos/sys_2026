@@ -18,26 +18,19 @@ try {
 export function Api(datax) {
     return new Promise((resolve, reject) => {
         const executeApiCall = async () => {
-            const backendUrl = process.env.BACKEND_URL; // Leemos la variable de entorno
-            const url = `${backendUrl}/${datax.api}`;
-            const metodo = datax.metodo ? datax.metodo : 'GET';
-            const accion = Object.keys(datax.data)[0].replace('accion_', '') || 'api';
-
-            // Hacemos la llamada a la API usando Axios
+            // Hacemos la llamada a la API usando Axios:
             try {
                 const response = await axios({
-                    url,
-                    method: metodo,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    data: datax.data,
+                    url: process.env.BACKEND_URL + '/' + datax.url,
+                    method: datax.method ? datax.method : 'GET',
+                    headers: { 'Content-Type': 'application/json', },
+                    data: datax.data || {},
                 });
                 resolve(response.data);
+            
+            // Manejo de errores:
             } catch (err) {
                 console.error('Error en la llamada a la API:', err);
-
-                // Manejo de errores
                 let titulo, mensaje;
 
                 if (err.message.includes('abort')) {

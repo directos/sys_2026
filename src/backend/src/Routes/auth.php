@@ -9,7 +9,13 @@ class Auth
 {
     public static function register(Router $router)
     {
-        $router->post('/login', [AuthController::class, 'login']);
+        $authController = new AuthController();
+
+        // Ruta para el login:
+        $router->post('/login', function () use ($authController) {
+            echo $authController->login();
+        });
+
         $router->post('/validate-token', [AuthController::class, 'validateToken']);
     }
 }

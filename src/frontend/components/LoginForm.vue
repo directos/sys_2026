@@ -12,7 +12,7 @@
         <form class="login-form" @submit.prevent="handleSubmit">
           <div class="wrap-input rs1">
             <img src="@/assets/icons/bx-user.svg" alt="User Icon" class="bx" />
-            <input v-model="user" class="login-input" type="text" name="user" placeholder="User" autocomplete="off"
+            <input v-model="usuario" class="login-input" type="text" name="user" placeholder="User" autocomplete="off"
               required />
           </div>
           <div class="wrap-input rs2">
@@ -28,12 +28,10 @@
         <!-- Texto inferior -->
         <div class="text-center small">
           <div class="text-danger mb-1" style="min-height: 18px;">{{ errorMessage }}</div>
+          
           <span class="text-white-50"><span>&copy;</span>{{ currentYear }}</span>
           <a href="#" class="text-white-50 ml-1" @click.prevent="clear">Clear</a>
-          <a href="https://statuspage.freshping.io/46357-SysFunerariaElEden" target="_blank" rel="noreferrer"
-            class="text-white-50 ml-1">
-            Estatus
-          </a>
+          <a href="https://statuspage.freshping.io/46357-SysFunerariaElEden" target="_blank" rel="noreferrer" class="text-white-50 ml-1">Estatus</a>
         </div>
       </main>
     </div>
@@ -42,8 +40,8 @@
 
 <script>
 import { ref, onMounted, computed } from "vue";
-import { Api } from "../utils/api.js";
 import { useStore } from 'vuex';
+import { Api } from "../utils/api.js";
 
 export default {
   name: "LoginForm",
@@ -51,44 +49,27 @@ export default {
     const store = useStore();
     const currentUser = computed(() => store.getters.getUser);
     const isAuthenticated = computed(() => store.getters.isAuthenticated);
+    
+    const usuario = ref("");
+    const password = ref("");
+    const errorMessage = ref("");
+    const currentYear = new Date().getFullYear();
 
-    const login = () => {
+    /*const login = () => {
       const mockUser = { name: 'John Doe', email: 'john@example.com' };
       store.dispatch('login', mockUser);
     };
 
     const logout = () => {
       store.dispatch('logout');
-    };
-
-    const userRef = ref("");
-    const password = ref("");
-    const errorMessage = ref("");
-    const currentYear = new Date().getFullYear();
-
-    // Para manejar el submit del formulario:
-    const handleSubmit = () => {
-      if (!userRef.value || !password.value) {
-        errorMessage.value = "Por favor, completa todos los campos.";
-        return;
-      }
-      // Aquí puedes manejar el envío del formulario
-      console.log("Usuario:", userRef.value);
-      console.log("Contraseña:", password.value);
-    };
-
-    const clear = () => {
-      userRef.value = "";
-      password.value = "";
-      errorMessage.value = "";
-    };
+    };*/
 
     // Al montar el componente, buscamos las sucursales:
     onMounted(async () => {
       try {
         const datax = {
-          api: "sucursales",
-          data: { accion_sucursales: {} },
+          url: 'sucursales',
+          data: {},
         };
         const response = await Api(datax);
         console.log("Sucursales:", response.length);
@@ -97,18 +78,52 @@ export default {
       }
     });
 
+    // Para manejar el submit del formulario:
+    const handleSubmit = async () => {
+      // Limpiar el mensaje de error antes de enviar la solicitud
+      errorMessage.value = "";
+      
+      // Llamaremos a api.js para hacer el login:
+      const datax = {
+        url: "login",
+        method: "POST",
+        data: { 
+          usuario: usuario.value, 
+          password: password.value 
+        },
+      };
+      try {
+        const response = await Api(datax);
+        if (response.success) {
+          console.log("OK:", response);
+          store.dispatch("login", response.token); // Actualiza el store con el resultado
+        } else {
+          errorMessage.value = response.message || "Credenciales incorrectas";
+        }
+      
+      // Si no devuelve estatus code 200:
+      } catch (err) {
+        errorMessage.value = "Error " + err.message;
+      }
+    };
+
+    // Al hacer clic en la opcion 'clear' del footer, limpiaremos el cache del dispositivo:
+    const clear = () => {
+      usuario.value = "";
+      password.value = "";
+      errorMessage.value = "";
+    };
+
     // Devolvemos las var y fn que queremos usar en el template:
     return {
-      user: userRef,
+      isAuthenticated,
+      currentUser,
+      usuario,
       password,
       errorMessage,
       currentYear,
       handleSubmit,
-      clear,
-      currentUser,
-      isAuthenticated,
-      login,
-      logout,
+      clear,      
     };
   },
 };
