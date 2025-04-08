@@ -11,7 +11,7 @@ class Web
     public static function register(Router $router)
     {
         $router->get('/', function () {
-            echo "Yo solo soy el router";
+            echo "Welcome to Sys API!";
         });
         
         $router->get('/sucursales', [SucursalController::class, 'getAll']);
