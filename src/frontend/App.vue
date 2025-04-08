@@ -7,19 +7,19 @@
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import LoginForm from './components/LoginForm.vue';
-import Home from './components/Home.vue';
+import LoginForm from '@/components/LoginForm.vue';
+import Sys from '@/views/Sys.vue';
 
 export default {
   name: 'App',
   components: {
     LoginForm,
-    Home,
+    Sys,
   },
   setup() {
     const store = useStore();
     const currentComponent = computed(() =>
-      store.getters.isAuthenticated ? 'Home' : 'LoginForm'
+      store.getters.isAuthenticated ? 'Sys' : 'LoginForm'
     );
 
     return {

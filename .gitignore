@@ -15,3 +15,6 @@ dependencias/
 # Configuraciones del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Otros
+/src/frontend/poc/

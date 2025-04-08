@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Welcome Home</h1>
-    <p>You are authenticated!</p>
+    <h1>Home</h1>
+    <p>Esta es la sección de inicio</p>
   </div>
 </template>
 

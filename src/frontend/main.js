@@ -13,7 +13,4 @@ const backendUrl = process.env.BACKEND_URL; // || 'http://localhost:5000';
 console.log('Frontend URL:', frontendUrl);
 console.log('Backend URL:', backendUrl);
 
-// Usa la URL del backend en tu aplicación
-const apiUrl = `${backendUrl}/api`;
-
 app.use(store).use(router).mount('#app');

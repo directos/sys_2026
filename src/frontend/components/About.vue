@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>About Page</h1>
-    <p>This is the About Page!</p>
-    <router-link to="/">Go to Home</router-link>
+    <h1>Acerca de Sys</h1>
+    <p>Esta es la sección 'acerca  de Sys'.</p>
+    <router-link to="/home">Ir a Inicio</router-link>
   </div>
 </template>
 

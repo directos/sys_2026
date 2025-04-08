@@ -11,12 +11,12 @@
         <!-- Login form -->
         <form class="login-form" @submit.prevent="handleSubmit">
           <div class="wrap-input rs1">
-            <i class="bx bx-user"></i>
+            <img src="@/assets/icons/bx-user.svg" alt="User Icon" class="bx" />
             <input v-model="user" class="login-input" type="text" name="user" placeholder="User" autocomplete="off"
               required />
           </div>
           <div class="wrap-input rs2">
-            <i class="bx bx-lock-alt"></i>
+            <img src="@/assets/icons/bx-lock-alt.svg" alt="User Icon" class="bx" />
             <input v-model="password" class="login-input" type="password" name="pass" placeholder="Password"
               autocomplete="new-password" required />
           </div>
@@ -419,6 +419,7 @@ a:hover {
 .bx {
   position: fixed;
   padding: 24px 14px;
-  color: #6783aa;
+  width: 44px;
+  opacity: 0.3;
 }
 </style>
