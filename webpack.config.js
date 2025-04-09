@@ -16,10 +16,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
     //stats: 'detailed', //'verbose', // 'errors-only', 
     entry: {
-        'app': './src/frontend/main.js',                            // Login
-        'movil/app-movil': './src/frontend/movil/index.js',         // Agendas móviles
-        'desktop/app-desktop': './src/frontend/desktop/index.js',   // Sys de escritorio
-        'desktop/app-lite': './src/frontend/lite/index.lite.js',    // Versión mini
+        'app': './src/frontend/main.js',
     },
     output: {
         // eslint-disable-next-line no-undef
@@ -76,9 +73,6 @@ module.exports = {
                 { from: './src/frontend/manifest.json', to: './' },
                 { from: './src/frontend/assets', to: './assets', globOptions: { dot: true, ignore: ['**/_img/**'] } },
                 { from: './src/frontend/assets/img/logo_print_min.jpg', to: './assets/img' },
-                { from: './src/frontend/templates', to: './templates' },
-                { from: './src/frontend/desktop/pages', to: './desktop' },
-                { from: './src/frontend/movil/pages', to: './movil' },
             ],
         }),
         new HtmlWebpackPlugin({
@@ -86,50 +80,6 @@ module.exports = {
             template: './src/frontend/index.html',
             chunks: ['app'],
             hash: false,            
-            minify: {
-                removeAttributeQuotes: true,
-                collapseWhitespace: true,
-                removeComments: true,
-            },
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'movil/index.html',
-            template: './src/frontend/movil/index.html',
-            chunks: ['movil/app-movil'],
-            hash: false,
-            minify: {
-                removeAttributeQuotes: true,
-                collapseWhitespace: true,
-                removeComments: true,
-            },            
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'desktop/index.html',
-            template: './src/frontend/desktop/index.html',
-            chunks: ['desktop/app-desktop'],
-            hash: false,
-            minify: {
-                removeAttributeQuotes: true,
-                collapseWhitespace: true,
-                removeComments: true,
-            },            
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'desktop/index.lite.html',
-            template: './src/frontend/lite/index.lite.html',
-            chunks: ['desktop/app-lite'],
-            hash: false,
-            minify: {
-                removeAttributeQuotes: true,
-                collapseWhitespace: true,
-                removeComments: true,
-            },            
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/frontend/board/index.html',
-            filename: 'board/index.html',
-            chunks: ['board/app-board'],
-            hash: false,
             minify: {
                 removeAttributeQuotes: true,
                 collapseWhitespace: true,
@@ -160,11 +110,8 @@ module.exports = {
             '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': JSON.stringify(false), // Opcional: Detalles de errores de hidratación
         }),
     ], 
-    /*watchOptions: {
-        ignored: /node_modules|build/, // Ignora cambios en estas carpetas
-    },*/
     performance: {
-        maxEntrypointSize: 960000,
-        maxAssetSize: 960000
+        maxEntrypointSize: 640000,
+        maxAssetSize: 640000
     },
 }

@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
-import App from './App.vue';
-import store from './store';
-import router from './router';
-import './assets/styles/global.css';
 import process from 'process'; // Para acceder a las variables de entorno 
+import store from '@/store';
+import router from '@/router';
+import '@/assets/styles/global.css';
+import App from '@/App.vue';
 
 const app = createApp(App);
 

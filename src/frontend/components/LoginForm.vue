@@ -41,7 +41,7 @@
 <script>
 import { ref, onMounted, computed } from "vue";
 import { useStore } from 'vuex';
-import { Api } from "../utils/api.js";
+import { Api } from "@/utils/api.js";
 
 export default {
   name: "LoginForm",
