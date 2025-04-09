@@ -1,47 +1,35 @@
 <template>
   <div>
-    <h1>Sys</h1>
-    <p>You are authenticated!</p>
-    <p>{{ currentUser }}</p>
-    <p><button @click="logout" class="logout-btn">Logout</button></p>
+    <component :is="currentView" />
   </div>
 </template>
 
 <script>
-import { useStore } from "vuex";
-import { computed } from "vue";
+import { defineAsyncComponent } from "vue";
+
+let vista = "desktop"; // Cambia esto a "mobile" o "desktop" según sea necesario
+if (window.innerWidth < 768) {
+  vista = "mobile";
+}
+
+console.log("Screen:", window.innerWidth); // Para depuración
+console.log("Vista:", vista); // Para depuración
 
 export default {
   name: "Sys",
-  setup() {
-    const store = useStore();
-
-    // Obtén el usuario actual desde Vuex:
-    const currentUser = computed(() => store.getters.getUser);
-
-    const logout = () => {
-      store.dispatch("logout"); // Actualiza el estado de autenticación en Vuex
-    };
-
+  components: {
+    // Lazy load de las vistas:
+    DesktopView: defineAsyncComponent(() => import("@/views/DesktopView.vue")),
+    MobileView:  defineAsyncComponent(() => import("@/views/MobileView.vue")),
+  },
+  data() {
     return {
-      currentUser,
-      logout,
+      currentView: vista === "desktop" ? "DesktopView" : "MobileView",
     };
   },
 };
 </script>
 
 <style>
-.logout-btn {
-  padding: 10px 20px;
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.logout-btn:hover {
-  background-color: #ff1a1a;
-}
+  /* Estilos globales para el componente Sys */
 </style>
