@@ -6,14 +6,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-
-let vista = "desktop"; // Cambia esto a "mobile" o "desktop" según sea necesario
-if (window.innerWidth < 768) {
-  vista = "mobile";
-}
-
-console.log("Screen:", window.innerWidth); // Para depuración
-console.log("Vista:", vista); // Para depuración
+import store from "@/store";
 
 export default {
   name: "Sys",
@@ -21,11 +14,22 @@ export default {
     // Lazy load de las vistas:
     DesktopView: defineAsyncComponent(() => import("@/views/DesktopView.vue")),
     MobileView:  defineAsyncComponent(() => import("@/views/MobileView.vue")),
+    LiteView:    defineAsyncComponent(() => import("@/views/LiteView.vue")),
   },
   data() {
     return {
-      currentView: vista === "desktop" ? "DesktopView" : "MobileView",
+      currentView: this.getCurrentView(),
     };
+  },
+  methods: {
+    getCurrentView() {
+      const vista = store.getters.getVista; // Leer el valor de 'vista' desde el store
+      if (vista === "desktop") {
+        return window.innerWidth < 768 ? "LiteView" : "DesktopView";
+      } else {
+        return "MobileView";
+      }
+    },
   },
 };
 </script>

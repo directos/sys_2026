@@ -55,15 +55,6 @@ export default {
     const errorMessage = ref("");
     const currentYear = new Date().getFullYear();
 
-    /*const login = () => {
-      const mockUser = { name: 'John Doe', email: 'john@example.com' };
-      store.dispatch('login', mockUser);
-    };
-
-    const logout = () => {
-      store.dispatch('logout');
-    };*/
-
     // Al montar el componente, buscamos las sucursales:
     onMounted(async () => {
       try {
@@ -88,7 +79,7 @@ export default {
         url: "login",
         method: "POST",
         data: { 
-          usuario: usuario.value, 
+          usuario: usuario.value.toLowerCase(), 
           password: password.value 
         },
       };
@@ -96,7 +87,13 @@ export default {
         const response = await Api(datax);
         if (response.success) {
           console.log("OK:", response);
-          store.dispatch("login", response.token); // Actualiza el store con el resultado
+          
+          // Actualiza el store con el resultado:
+          store.dispatch("login", { 
+            user: response.usuario, 
+            vista: response.vista, 
+            sabor: response.sabor 
+          }); 
         } else {
           errorMessage.value = response.message || "Credenciales incorrectas";
         }
