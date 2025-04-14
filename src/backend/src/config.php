@@ -20,7 +20,7 @@ class Config
             'jwt' => [
                 'secret' => $_ENV['JWT_SECRET'] ?? 'miLlaveSecretaParaSys20120420',
             ],
-            'utc_local' => 21600,
+            'utc_local' => 21600, // UTC-6
         ];
     }
 }
